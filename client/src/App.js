@@ -1,17 +1,23 @@
 import { useState, useEffect } from "react";
-
+import NavBar from './NavBar';
+import LandingPage from './LandingPage';
+import HomeProducts from './HomeProducts';
+import {Route, Switch, Link } from 'react-router-dom';
+ import './App.css';
 function App() {
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    fetch("/hello")
-      .then((r) => r.json())
-      .then((data) => setCount(data.count));
-  }, []);
+  
 
   return (
     <div className="App">
-      <h1>Page Count: {count}</h1>
+      <NavBar />
+      <Switch>
+        <Route path="/home">
+          <HomeProducts />
+          </Route>
+        <Route exact path="/">
+      <LandingPage />
+      </Route>
+      </Switch>
     </div>
   );
 }
