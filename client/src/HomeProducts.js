@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 function HomeProducts(){
     const [products, setProducts] = useState([]);
     const [error, setError] = useState('');
+// to test out if my stuff is working
 
     useEffect(()=> {
         fetch("/home")
