@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ProductCard from './ProductCard';
 
-function HomeProducts(){
+function LifestyleProducts(){
     const [products, setProducts] = useState([]);
     const [error, setError] = useState('');
 
 
     useEffect(()=> {
-        fetch("/home")
+        fetch("/lifestyle")
         .then((resp)=> {
             if (resp.ok) return resp.json();
             throw new Error ('something went wrong while requesting products');
@@ -37,10 +37,9 @@ function HomeProducts(){
     return(
         <div>
             {/* HOME PRODUCTS */}
-           
             {productList}
         </div>
     )
 }
 
-export default HomeProducts;
+export default LifestyleProducts;

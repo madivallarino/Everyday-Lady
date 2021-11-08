@@ -1,55 +1,60 @@
-import girl from './girl.jpg'
-import { CgGirl } from 'react-icons/fa';
+import { useState, useEffect } from 'react'; 
 
+import ProductCard from './ProductCard';
 function NavBar(){
+// const [cart, setCart] = useState([]);
+const [error, setError] = useState("");
 
 
-
+// useEffect(()=> {
+//   fetch('/cart')
+//   .then((r)=> r.json())
+//   .then(data=> setCart(data))
+// }, [])
 
     return(
       <>
-      <div className="nav-bar-header">
-        <nav>
-        <a className="company-logo" href="/">
-           Company
-        </a> 
-        <ul className="nav navbar-nav navbar-right">
-        <li><a href="#"><span className="glyphicon glyphicon-user"></span> Sign Up</a></li>
-      <li><a href="#"><span className="glyphicon glyphicon-log-in"></span> Login</a></li>
+      <nav className="nav">
+        <a className="logo" href="/"> The Everyday Lady </a>
+        <ul className="nav-links">
+      <li><a href="/home"> Home</a></li>
+      <li><a href="/lifestyle"> Lifestyle</a></li>
+      <li><a href="/clothing"> Clothing</a></li>
         </ul>
-        </nav>
-      </div>
-      <div className="nav-bar-below">
-        <nav className="navbar navbar-default">
-       <ul className="nav nav-tabs">
-      <li className="active"><a href="home">HOME</a></li>
-      <li><a href="#">LIFESTYLE</a></li>
-      <li><a href="#">CLOTHING</a></li>
-    </ul>
-    </nav>
-      </div>
+        <a className="cta" href="/login"><button>Login/Signup</button></a>
+       
+       
+      </nav>
+        
       </>
-        // <nav className="nav-bar">
-        //     {/* NavBar */}
-        //     <div>
-        //     <a  href="#">
-        //     <img src={girl} alt="girl" width="50" height="50"/>
-        //     </a> 
-        //     <ul >
-        // <li >
-        //   <a  className="nav-bar" aria-current="page" href="#"> Home </a>
-        // </li>
-        // <li>
-        //   <a className="nav-bar" aria-current="page" href="#"> Lifestyle </a>
-        //   </li>
-        //   <li >
-        //   <a className="nav-bar" aria-current="page" href="#"> Clothing </a>
-        // </li>
-        // </ul>
-        // <button>Signup/Login</button>
-        // </div>
-        // </nav>
     )
 }
 
 export default NavBar;
+
+
+// <div className="nav-bar-header">
+// <nav>
+// <a className="company-logo" href="/">
+//    The Everyday Lady
+// </a> 
+// <ul className="">
+// <li><a href="/signup"><span className=""></span> Sign Up</a></li>
+// <li><a href="/login"><span className=""></span> Login</a></li>
+// </ul>
+// </nav>
+// </div>
+// <div className="">
+// <nav className="">
+// <ul className="nav nav-tabs">
+// <li className="active"><a href="/home">HOME</a></li>
+// <li><a href="#">LIFESTYLE</a></li>
+// <li><a href="#">CLOTHING</a></li>
+// </ul>
+// <a className="cart-logo" href="/cart">
+// <span class="glyphicon glyphicon-shopping-cart"></span>
+// </a> 
+// <a></a>
+
+// </nav>
+// </div>
