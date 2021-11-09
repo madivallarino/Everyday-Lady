@@ -151,10 +151,15 @@ button:hover{
   height: 80%;
   width:100%;
 }
+
 .mainimage{
   border: 10px solid slateblue;
   height:100%;
   width:65%;
+}
+.mainimage img{
+  width: 50%;
+  height: 80%;
 }
 .sideimages{
   border: 10px solid saddlebrown;
@@ -170,6 +175,9 @@ height:100%;
   height: 20%;
   width:100%;
 }
+.topbox2 img{
+  width:100%;
+}
 .middlebox{
   border: 10px solid pink;
   height: 33%;
@@ -182,20 +190,32 @@ height:100%;
   border: 10px solid violet;
   height: 80%;
   width: 100%;
+  flex-direction: row;
+  
 }
 /* .naholders{
 flex-direction: column;
 } */
 .newarrivals{
   border: 10px solid rebeccapurple;
-
   height: 50%;
+  
+ 
 }
+
+.newarrivals div {
+border: 5px solid pink;
+width: fit-content;
+
+}
+
 
 .mp{
   border: 10px solid black;
   height:50%;
 }
+
+
 .middlebox2{
   border: 10px solid green;
   height: 20%;

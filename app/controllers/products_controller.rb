@@ -41,6 +41,7 @@ class ProductsController < ApplicationController
     end
 
     def load_cart 
+        # byebug
         items = Product.find(session[:cart])
         render json: items
     end
@@ -51,7 +52,6 @@ def remove_from_cart
 end
 
 
-private
     def initialize_session 
         # session.delete(:cart)
         session[:cart] ||= []

@@ -23,8 +23,7 @@ function deleteFromCart(id){
 
 
       const productList = cart.map((product)=> {
-        return ( 
-     
+        return (<>
         <CartItemCard 
         name={product.name} 
         price={product.price} 
@@ -33,14 +32,28 @@ function deleteFromCart(id){
         back_image={product.back_image} 
         id={product.id}
         deleteFromCart={deleteFromCart}/>
-       
-        )
+        </>)
     })
 
   const prices = cart.map((product)=> product.price)
-  
-  
+//   let total = 0;
 
+ function totalPrice(){
+    let total = 0;
+      for(let i = 0; i < prices.length; i++){
+          total += prices[i];
+      }
+      return total
+  }
+//   console.log(cart)
+
+//   const totalPrice = cart.map((product)=> product.price).reduce((a, b)=> {return (a + b)}, [])
+// console.log(totalPrice)
+// const total = totalPrice.reduce((acc, value)=> { 
+    // acc = acc.concat(value + value);
+    // return acc;
+//}, []);
+// console.log(totalPrice)
     return(
         <>
         <div className="cart-items">
@@ -48,8 +61,10 @@ function deleteFromCart(id){
         {productList}
         </div>
         <div className="checkout-process">
-        Shipping: <br/>
-            Total:  <br/>
+        Shipping:  <br/>
+            Total: $ {totalPrice()} .00 
+            
+                <br/>
         <button onClick={()=> setShow(show=> !show)}> Checkout</button> 
        <div className= {show ? "modal" : "closed"}>
         <CheckoutModal onClose={()=> setShow(show=> !show)} show={show} />
