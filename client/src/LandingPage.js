@@ -1,9 +1,11 @@
 import lady from './lady.png'
 import ad from './ad.png'
+import alady from './alady.gif'
 import {useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import LandingPageCard from './LandingPageCard';
-
+import styled from 'styled-components'
+import picture from './picture.webp'
 function LandingPage(){
 const [clothing, setClothing] = useState([]);
 const [home, setHome] = useState([]);
@@ -25,93 +27,107 @@ useEffect(()=> {
     .then(setLifestyle)
 },[])
 
-function shuffle(array){
-    for (let i = array.length -1 ; i> 0; i--){
-        let j = Math.floor(Math.random()* (i + 1));
-        let temp = array[i];
-        array[i] = array [j]
-        array[j] = temp;
-    }
-    return array
-}
+// function shuffle(array){
+//     for (let i = array.length -1 ; i> 0; i--){
+//         let j = Math.floor(Math.random()* (i + 1));
+//         let temp = array[i];
+//         array[i] = array [j]
+//         array[j] = temp;
+//     }
+//     return array
+// }
+function sideImages(array, num1, num2){
+   let newClothing = array.slice(num1,num2).map((product)=> {
+    return (
+        <a href={`/products/${product.id}`}>
+    <LandingPageCard 
+                name={product.name} 
+                price={product.price} 
+                image={product.image} 
+                color={product.color} 
+                back_image={product.back_image} 
+                id={product.id}
+                key={product.id}/>
+     </a> 
+       )
+            }
+    )
+    return newClothing
+} 
 
+
+
+{/* <img src={lady} alt="lady"/> */}
 
     return(
         <>
         <div className="everythingbox">
+        <div className="ad3">
+                <img src={ad} alt="ad3"/>
+                </div>
         <div className="topbox">
             <div className="topbox1">
-                <div className="mainimage"></div>
-                <div className="sideimages"> {clothing.slice(0,3).map((product)=> {
-        return (
-        <div className="side">
-        <Link to={`/products/${product.id}`}>
-         <LandingPageCard 
-            name={product.name} 
-            price={product.price} 
-            image={product.image} 
-            color={product.color} 
-            back_image={product.back_image} 
-            id={product.id}/>
-        </Link>
-        </div>
-        )})}<div>
-    
-        </div> 
-{/*     top box above */}
-
-
-        </div>
+                 <div className="headerbox">
+                    <div className="boxes headermainbox" >
+                            <img src={picture} alt="lady"/>
+                            <div className="textbox">
+                            <p>We are proud of <br/> our past and excited <br/> for our future.  Based <br/> in Manhattan, we <br/> strive to bring sustainable 
+                            <br/> and eco-friendly products.<br/> We want to support the <br/> ladies that go on to<br/> support the world <br/> and we know, <br/> with good clothes<br/> come good moves. 
+                            <br/> 
+                            <br/> </p></div>
+                    </div>
+                    <div className="boxes headersplitbox">
+                        <div className="headerside">
+                            {sideImages(clothing, 25,26)}
+                        </div>
+                        <div className="headerside">
+                            {sideImages(clothing, 8,9)}
+                        </div>
+                    </div>
+                    <div className="boxes headerlowerbox">
+                    {sideImages(home, 8,9)}
+                    </div>
+                 </div>
+                <div className="sideimages"> 
+                {sideImages(clothing,2,6)}
+                </div>
             </div>
-            <div className="topbox2">
-            <img src={ad} alt="ad" />
+            <div className="ad4">
+                <img src={ad} />
             </div>
-        </div>
-        <div className="middlebox">
+    </div>
+    <div className="middlebox">
             
-            <div className="newarrivals">
-         {clothing.slice(8,10).map((product)=> {
-    return (
-        <div className="NA">
-     {/* <Link to={`/products/${product.id}`}> */}
-        <LandingPageCard 
-            name={product.name} 
-            price={product.price} 
-            image={product.image} 
-            color={product.color} 
-            back_image={product.back_image} 
-            id={product.id}/>
-        {/* </Link> */}
+            {/* <div className="newarrivals">
+         {sideImages(12,16)}
+            </div> */}
+       
+        <div className="middlebox1"> 
+        {sideImages(clothing,30,34)}
         </div>
-            )})} 
-            </div>
-        <div className="middlebox1">
+        <div className="ad">
+            <img src={alady} alt="ad2" />
+        </div>
            
-    <div className="mp">
-{clothing.slice(30,34).map((product)=> {
-    return (
-     <div className="MP">
-    {/* <Link to={`/products/${product.id}`}>
-     <LandingPageCard 
-            name={product.name} 
-            price={product.price} 
-            image={product.image} 
-            color={product.color} 
-            back_image={product.back_image} 
-            id={product.id}/>
-    </Link> */}
+    {/* <div className="mp">
+        
+        </div> */}
+        <div className="middlebox2">
+
+        {sideImages(clothing,12,16)}            
         </div>
-        )})}
+        <div className="ad">
+            <img src={ad} alt="ad" />
         </div>
-        <div className="middlebox2"></div>
-        </div>
+    </div>
         
         
+       
+    <div className="lowbox">
+        <div className="lowbox1">
+        {sideImages(lifestyle,4,8)}  
         </div>
-         <div className="lowbox">
-        <div className="lowbox1"></div>
-        <div className="lowbox2"></div>
-        </div>
+    </div>
         </div>
        
         </>
@@ -123,53 +139,3 @@ export default LandingPage;
 
 
 
-
-
-// <div className="text-container">
-//         <h2>The <br/> Everyday <br/> Lady</h2>
-//         <p>We are proud of our past <br/> and excited for our future. <br/> We strive to bring sustainable <br/> and eco-friendly products <br/> to our everyday ladies. </p>
-//         </div>
-//         <div className="image-container">
-//         <img src={lady} alt="lady"/>
-//         </div>
-
-
-
-
-            // <div className="newarrivals">
-                /* Blue Bouquet Cardigan */
-                //     <img src="https://images.urbndata.com/is/image/UrbanOutfitters/65424574_012_d?$xlarge$&fit=constrain&fmt=webp&qlt=80&wid=720" alt="na1"/>
-                //     {/* Rugrats Snow Fight T-Shirt Dress */}
-                //   <img src="https://images.urbndata.com/is/image/UrbanOutfitters/65552424_011_g?$xlarge$&fit=constrain&fmt=webp&qlt=80&wid=720" alt="na2"/>
-                //   {/* Destroyed Long Sleeve Tee */}
-                //   <img src="https://images.urbndata.com/is/image/UrbanOutfitters/65543951_001_b?$xlarge$&fit=constrain&fmt=webp&qlt=80&wid=720" alt="na3"/>
-                //   {/* Colorblock Button-Down Shirt */}
-                //   <img src="https://images.urbndata.com/is/image/UrbanOutfitters/63136212_095_d?$xlarge$&fit=constrain&fmt=webp&qlt=80&wid=720" alt="na4"/>
-                //   {/* Claudia Blouse */}
-                //   <img src="https://images.urbndata.com/is/image/UrbanOutfitters/62962311_001_b?$xlarge$&fit=constrain&fmt=webp&qlt=80&wid=720" alt="na5"/>
-                //   </div>
-
-
-        //         <div className="mp">
-        //     {/* Low-Rise Cargo Pant */}
-        //     <img src="https://images.urbndata.com/is/image/UrbanOutfitters/62609078_012_b?$xlarge$&fit=constrain&fmt=webp&qlt=80&wid=720" alt="mp1" />
-        //     {/* Jadey Henley Top */}
-        //     <img src="https://images.urbndata.com/is/image/UrbanOutfitters/65184350_024_b?$xlarge$&fit=constrain&fmt=webp&qlt=80&wid=720" alt="mp2" />
-        //     {/* Tunic Top */}
-        //     <img src="https://images.urbndata.com/is/image/UrbanOutfitters/62867924_004_b?$xlarge$&fit=constrain&fmt=webp&qlt=80&wid=720" alt="mp3" />
-        //     {/* Pull-On Flare Pant */}
-        //     <img src="https://images.urbndata.com/is/image/UrbanOutfitters/62634464_089_b?$xlarge$&fit=constrain&fmt=webp&qlt=80&wid=720" alt="mp4" />
-        //     {/* Ruched Blouse */}
-        //     <img src="https://images.urbndata.com/is/image/UrbanOutfitters/64094709_011_b?$xlarge$&fit=constrain&fmt=webp&qlt=80&wid=720" alt="mp5" />
-        // </div>
-
-
-    //     <div className="lowbox1">
-    //     {/* Polaroid Now+ Instant Camera */}
-    // <img src="https://images.urbndata.com/is/image/UrbanOutfitters/65485948_010_b?$xlarge$&fit=constrain&fmt=webp&qlt=80&wid=720" alt="ls1"/>
-    // {/* Hero Cosmetics Emergency Stress Kit */}
-    // <img src="https://images.urbndata.com/is/image/UrbanOutfitters/64505829_000_b?$xlarge$&fit=constrain&fmt=webp&qlt=80&wid=720" alt="ls2"/>
-    // {/* Terracotta Grow Kit */}
-    // <img src= "https://images.urbndata.com/is/image/UrbanOutfitters/64271554_030_b?$xlarge$&fit=constrain&fmt=webp&qlt=80&wid=720" alt="ls3"/>
-
-    // </div>

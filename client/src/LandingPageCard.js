@@ -1,15 +1,21 @@
 import { Link } from 'react-router-dom';
 
+
 function LandingPageCard(props){
     const {  name, price, color, image, back_image} = props
-
+    
     return(
-        <>
-        <h4>{name}</h4>
+        <div className="productcard">
+       
+        
         <img src={image} alt="landingimage"/>
-        <h5>${price}</h5>
-        </>
+        <h4>{name}</h4>
+        
+        </div>
     )
 }
 
 export default LandingPageCard;
+
+
+

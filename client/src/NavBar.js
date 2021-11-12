@@ -1,16 +1,32 @@
 import { useState, useEffect } from 'react'; 
-
+import download from './download.png'
 import ProductCard from './ProductCard';
-function NavBar(){
-// const [cart, setCart] = useState([]);
+function NavBar({search, setSearch, refresh, setRefresh}){
+const [cart, setCart] = useState([]);
 const [error, setError] = useState("");
 
 
-// useEffect(()=> {
-//   fetch('/cart')
-//   .then((r)=> r.json())
-//   .then(data=> setCart(data))
-// }, [])
+useEffect(()=> {
+  fetch('/cart')
+  .then((r)=> r.json())
+  .then(data=> setCart(data))
+}, [refresh])
+
+const cartNum = cart.map((product)=> product.number) 
+
+function totalItems(){
+  let itemNum = 0;
+  for (let i = 0; i < cartNum.length; i++){
+    itemNum += cartNum[i]
+  }
+  
+  return itemNum
+}
+function handleSearch(e, search){
+  e.preventDefault()
+  setSearch(search)
+  
+}
 
     return(
       <>
@@ -21,7 +37,18 @@ const [error, setError] = useState("");
       <li><a href="/lifestyle"> Lifestyle</a></li>
       <li><a href="/clothing"> Clothing</a></li>
         </ul>
-        <a className="cta" href="/login"><button>Login/Signup</button></a>
+        <form className="searchbar" onSubmit={handleSearch}>
+      <input
+        type="text"
+        id="search"
+        className="input"
+        value={search}
+        placeholder="Search ..."
+      onChange={(e)=> setSearch(e.target.value)}/>
+      {/* <a href="#"><input type="submit"/></a> */}
+       {/* <button onClick="location.href='/home">🔍</button> */}
+    </form>
+        <a className="cta" href="/cart"><p>{totalItems()}</p><img src="https://toppng.com/uploads/preview/freebag-vector-retail-shopping-cart-bag-icon-11553505193l9s1kngqvt.png"alt="cart" className="cartlogo"/></a>
        
        
       </nav>

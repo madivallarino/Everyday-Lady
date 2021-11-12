@@ -1,10 +1,11 @@
 import { useState } from 'react';
+import picture from './picture.webp'
 
-function SignupLogin({onLogin}) {
+function SignupLogin({onLogin, handleLogout}) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [passwordConfirmation, setPasswordConfirmation] = useState("");
-    const [newUser, setNewUser] = useState([]);
+    const [name, setName] = useState("");
     const [loginEmail, setLoginEmail] = useState("")
     const [loginPassword, setLoginPassword] = useState("")
 
@@ -37,79 +38,91 @@ function SignupLogin({onLogin}) {
                 email,
                 password,
                 password_confirmation: passwordConfirmation,
-                name: newUser.name,
+                name: name,
             }),
         })
             .then((r) => r.json())
-            .then(data => console.log(data));
+            .then(data => onLogin(data));
     }
 
-    function handleChange(event) {
-        setNewUser({ ...newUser, [event.target.name]: event.target.value })
-    }
+    // function handleChange(event) {
+    //     setNewUser({ ...newUser, [event.target.name]: event.target.value })
+    // }
 
 
     return (
-        <>
-        <div className="login">
-            <form onSubmit={handleLogin}>
-                <input
+        <div className="holdsall">
+        <div className="signinpicture">
+        <   img src={picture} alt="picture"/>
+        </div>
+        <div className="formcontainer">
+            <label>Sign In</label><br/>
+            <div className="login">
+                <form onSubmit={handleLogin}>
+                    <label htmlFor="email">Email:</label>
+                    <input
                     type="text"
                     value={loginEmail}
                     onChange={(e) => setLoginEmail(e.target.value)}
-                />
-                <input
+                    /><br/>
+                    <label htmlFor="password">Password: </label>
+                    <input
                     type="password"
                     value={loginPassword}
                     onChange={(e) => setLoginPassword(e.target.value)}
-                />
-                <button type="submit">Login</button>
-            </form>
-        </div>
-        <div className="signup">
-        <form onSubmit={handleSignup}>
-            <div>
-                <label htmlFor="name">Your Name:</label>
-                <input
+                    /><br/>
+                    <button type="submit">Login</button>
+                </form>
+            </div><br/>
+            <div className="signup">
+        <       form onSubmit={handleSignup}>
+                <div>
+                    <label htmlFor="name">Your Name:</label>
+                    <input
                     type="text"
                     name="name"
-                    value={newUser.name}
-                    onChange={handleChange}
-                />
-            </div>
-            <div>
-                <label htmlFor="email">Email:</label>
-                <input
+                    value={name}
+                    onChange={(e)=> setName(e.target.value)}
+                    />
+                </div>
+                <div>
+                    <label htmlFor="email">Email:</label>
+                    <input
                     type="text"
                     name="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                />
-            </div>
-            <div>
-                <label htmlFor="password">Password:</label>
-                <input
+                    />
+                </div>
+                <div>
+                    <label htmlFor="password">Password:</label>
+                    <input
                     type="password"
                     name="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                />
-            </div>
-            <div>
-                <label htmlFor="password_confirmation">Confirm Password:</label>
-                <input
+                    />
+                </div>
+                <div>
+                    <label htmlFor="password_confirmation">Confirm Password:</label>
+                    <input
                     type="password"
                     name="password_confirmation"
                     value={passwordConfirmation}
                     onChange={(e) => setPasswordConfirmation(e.target.value)}
-                />
+                    />
+                </div>
+                     <button type="submit">Sign Up</button>
+                </form>
+                <button onClick={handleLogout}>Logout</button>
+                </div>
             </div>
-            <button type="submit">Sign Up</button>
-        </form>
+            <div className="companydescription">
+                    <h3>Sustainable, <br/> Products <br/> For The <br/> Everyday </h3>
+                        <br/>
+                    <p>more company info </p>
+            </div>
         </div>
-
-
-        </>
     );
 };
 

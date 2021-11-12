@@ -4,7 +4,7 @@ function Footer(){
 
 
     return(
-        <>
+        <div className="footer">
         <form>
           <p>Get Our Emails</p>
           <p>Sign up to receive The Everyday Lady's emails and get first dibs on new arrivals, sales, exclusive content and more!</p>
@@ -39,7 +39,7 @@ function Footer(){
             <li>Creative Services</li>
           </ul>
         </div>
-        </>
+        </div>
     )
 }
 

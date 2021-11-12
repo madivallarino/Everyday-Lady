@@ -6,9 +6,10 @@ function ProductCard(props){
     return(
         <div className="product-card">
         <span className="product-info">
+        <h5>${price}</h5>
         <h4 className="product-name">{name}</h4>
         <img src={image} alt="product image"/>
-        <h5>${price}</h5>
+        
         </span>
         </div>
     )

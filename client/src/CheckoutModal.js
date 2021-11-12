@@ -1,7 +1,7 @@
 
 import { useState } from 'react';
 
-function CheckoutModal({onClose}){
+function CheckoutModal({onClose, user, setUser, onLogin}){
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [passwordConfirmation, setPasswordConfirmation] = useState("");
@@ -22,7 +22,7 @@ function CheckoutModal({onClose}){
             }),
         })
             .then((r) => r.json())
-            .then((user) => console.log(user));
+            .then((data) => onLogin(data));
     }
     // const [email, setEmail] = useState("");
     // const [password, setPassword] = useState("");
@@ -49,25 +49,21 @@ function CheckoutModal({onClose}){
         setNewUser({ ...newUser, [event.target.name]: event.target.value })
     }
 
+    function handleCheckout(){
+        console.log("This is firing")
+        fetch('/products/clear_cart', {
+            method: "DELETE"
+        })
+        .then(window.location.href="/orders")
+    }
+
     return(
         <>
-        Signup or Login to Checkout 
-        <button onClick={onClose}>X</button>
-        <div className="login">
-            <form onSubmit={handleLogin}>
-                <input
-                    type="text"
-                    value={loginEmail}
-                    onChange={(e) => setLoginEmail(e.target.value)}
-                />
-                <input
-                    type="password"
-                    value={loginPassword}
-                    onChange={(e) => setLoginPassword(e.target.value)}
-                />
-                <button type="submit">Login</button>
-            </form>
-        </div>
+        <button onClick={onClose} className="topright">X</button>
+        <div className={user ? "closed": "open"}>
+        <h3>Signup or Login to Checkout </h3>
+        
+    
         <div className="signup">
         <form onSubmit={handleSignup}>
             <div>
@@ -110,7 +106,26 @@ function CheckoutModal({onClose}){
         </form>
         </div>
         {/* Checkout as guest */}
-        <button> Checkout as Guest </button>
+        <button onClick={handleCheckout}> Checkout as Guest </button>
+        <br/>
+        <div className="login">
+            <form onSubmit={handleLogin}>
+                <input
+                    type="text"
+                    value={loginEmail}
+                    onChange={(e) => setLoginEmail(e.target.value)}
+                /><br/>
+                <input
+                    type="password"
+                    value={loginPassword}
+                    onChange={(e) => setLoginPassword(e.target.value)}
+                /><br/>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+        </div>
+        <h3>{user ? `Hey! ${user.name} Ready to check out?` : null}</h3>
+        <h3>{user ? <button onClick={handleCheckout}>Complete Payment</button>: null}</h3>
         </>
     )
 }
