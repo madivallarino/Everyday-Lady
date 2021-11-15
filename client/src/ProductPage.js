@@ -86,39 +86,40 @@ function handleCart(product){
        <div className="productpagecontainer">
            <div>
              
-               <h4>
-               The Everyday Lady / {product.category}
-               </h4>
-               <button onClick={handleClick}>Go Back</button>
+               <h4 className="sidetitle">
+               women's / <Link to={`/${product.category}`} className="categorylink">{product.category} </Link> </h4>
+               {/* <button onClick={handleClick} className="productbutton">Go Back</button> */}
            </div>
            <div className="title">
                {product.name}
            </div>
          <div className="mainbox">
-         <div className="boxtop2">
-                    <h2>${product.price}.00</h2>
-                    <div className="details">
-                        <h3>Product Description:</h3>
-                        <p>{product.description}</p>
-                    </div>
-                    <h4>Reviews: <br/> {handleAverage()}</h4>
-                    <h3>Color: {product.color}</h3>
-                    <button onClick={()=> handleCart(product)}>Add to Bag</button>
-                    <a href="#">Add to Wish List</a>
-                      
-                    <h3>Shipping</h3>
-             </div>
+         <div className="extras">
+
+<img src={product.image} />
+<br/>
+<img src={product.back_image} />     
+</div> 
+        
              <div className="boxtop">
                    
                     <div className="mainimage">
                     <img src={product.image} />
                     </div>
              </div>
-             <div className="extras">
-
-                    <img src={product.image} />
-                    <img src={product.back_image} />     
-               </div> 
+             <div className="boxtop2">
+                    <h2>${product.price}.00</h2>
+                    <div className="details">
+                        <h3>Product Description:</h3>
+                        <p>{product.description}</p>
+                    </div>
+                    <h4>Star Rating:<h5>{handleAverage()}</h5></h4>
+                    <h3>Color: {product.color}</h3>
+                    <button onClick={()=> handleCart(product)}>Add to Bag</button>
+                    <a href="#">Add to Wish List</a>
+                      
+                    <h3>Shipping</h3>
+             </div>
 
          </div>
          <div className="reviews">

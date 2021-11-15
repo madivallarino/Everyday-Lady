@@ -9,7 +9,7 @@ import OrderPage from './OrderPage';
 import ProductCard from './ProductCard';
 import ProductPage from './ProductPage';
 import SignupLogin from './SignupLogin';
-
+import About from './About';
 // import Login from './Login';
 import Footer from './Footer';
 
@@ -142,6 +142,9 @@ function totalItems(){
             <Route path='/lifestyle'>
               <LifestyleProducts />
               </Route>
+              <Route path='/about'>
+                <About />
+                </Route>
           <Route path="/login">
             <SignupLogin onLogin={onLogin} handleLogout={handleLogout}/>
             </Route>
