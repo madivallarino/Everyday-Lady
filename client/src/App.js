@@ -9,7 +9,7 @@ import OrderPage from './OrderPage';
 import ProductCard from './ProductCard';
 import ProductPage from './ProductPage';
 import SignupLogin from './SignupLogin';
-import SearchBar from './SearchBar';
+
 // import Login from './Login';
 import Footer from './Footer';
 
@@ -32,11 +32,11 @@ const [ refresh, setRefresh ] = useState(false)
   // };
   // // potential problem because we need it to re-render every time the button is clicked 
   //sort of works for now
-  useEffect(()=> {
-    fetch('/cart')
-    .then((r)=> r.json())
-    .then(data=> setCart(data))
-  }, [show, refresh])
+  // useEffect(()=> {
+  //   fetch('/cart')
+  //   .then((r)=> r.json())
+  //   .then(data=> setCart(data))
+  // }, [show, refresh])
   
   // function handleCart(props){
   //   setCart.push(props)
@@ -47,7 +47,7 @@ const [ refresh, setRefresh ] = useState(false)
       fetch('/allproducts')
       .then((r)=> r.json())
       .then(data => {
-          console.log(data)
+          // console.log(data)
           setAllProducts(data)
       })
   }, [])
@@ -85,6 +85,7 @@ function handleLogout(){
       if (r.ok) {
         r.json().then((data) => {
           setUser(data)
+          // console.log(data)
         });
       }
     });
@@ -129,7 +130,7 @@ function totalItems(){
       {/* <div className= {show ? "modal" : "closed"}>
         <CartModal onClose={()=> setShow(show=> !show)} show={show} cart={cart}/>
         </div> */}
-        <SearchBar search={search} onSearch={handleSearch}/>
+        
         {search ? handleSearch(): 
         <Switch>
         <Route path="/home">
@@ -144,11 +145,8 @@ function totalItems(){
           <Route path="/login">
             <SignupLogin onLogin={onLogin} handleLogout={handleLogout}/>
             </Route>
-            {/* <Route path="/signup">
-              <Signup />
-      </Route> */}
               <Route path="/orders">
-                  <OrderPage cart={cart}/>
+                  <OrderPage user={user}/>
                   </Route>
               <Route path="/cart">
                 <CartPage cart={cart} setUser={setUser} user={user} refresh={refresh} setRefresh={setRefresh} onLogin={onLogin}/>

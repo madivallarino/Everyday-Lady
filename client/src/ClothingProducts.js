@@ -33,7 +33,7 @@ function ClothingProducts(){
         )
     })
    
-  
+  console.log(products)
 
     return(
         <div className="everythingcontainer">

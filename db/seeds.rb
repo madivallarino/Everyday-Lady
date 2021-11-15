@@ -1,5 +1,7 @@
+Review.destroy_all
 Product.destroy_all
-# # HOME PRODUCTS 
+User.destroy_all
+# # # HOME PRODUCTS 
 Product.create(name: "Rainbow Bath Mat", price: 10, color: "Multi", category: "home", image: "https://s7d5.scene7.com/is/image/UrbanOutfitters/62970454_001_b?$xlarge$&fit=constrain&fmt=webp&qlt=80&wid=960", back_image:"https://s7d5.scene7.com/is/image/UrbanOutfitters/62970454_001_d?$medium$&fit=constrain&fmt=webp&hei=1046&qlt=80&wid=698", description: "Channel rich color and dreamy vibes with this rainbow bath mat by Kip&Co. Shaped design made from a cotton tufted shag with a textural pile that’s so cushy underfoot.", number: 1)
 Product.create(name: "Froggie Bath Mat", price: 10, color: "Multi", category: "home", image: "https://s7d5.scene7.com/is/image/UrbanOutfitters/64299340_095_b?$xlarge$&fit=constrain&fmt=webp&qlt=80&wid=960", back_image: "https://s7d5.scene7.com/is/image/UrbanOutfitters/64299340_095_e?$xlarge$&fit=constrain&fmt=webp&qlt=80&wid=960", description: "Hop through your daily routines with this ultra-cute frog-shaped bath mat that turns your getting-ready space into its very own lily pad. Made from cotton terry that’s so cushy.", number: 1)
 Product.create(name: "Yin Yang Mirror Set", price: 12, color: "Natural", category: "home", image: "https://s7d5.scene7.com/is/image/UrbanOutfitters/63371736_111_b?$xlarge$&fit=constrain&fmt=webp&qlt=80&wid=960" , back_image: "https://s7d5.scene7.com/is/image/UrbanOutfitters/63371736_111_d?$xlarge$&fit=constrain&fmt=webp&qlt=80&wid=960", description: "Find balance with this two-piece mirror in a nestled yin yang silhouette", number: 1)

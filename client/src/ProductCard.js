@@ -1,7 +1,7 @@
-import { Link } from 'react-router-dom';
+
 
 function ProductCard(props){
-    const {  name, price, color, image, back_image} = props
+    const {  name, price,  image} = props
 
     return(
         <div className="product-card">

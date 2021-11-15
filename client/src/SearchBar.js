@@ -6,7 +6,7 @@ function SearchBar({search}){
 
 
 
-console.log(search)
+// console.log(search)
 // const searchItems = allProducts.filter((product)=> product.name.toLowerCase().includes(search.toLowerCase())).map((product)=> {
 //     return ( 
 //         <Link to={`/products/${product.id}`}>

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'; 
-import download from './download.png'
+// import download from './download.png'
 import ProductCard from './ProductCard';
 function NavBar({search, setSearch, refresh, setRefresh}){
 const [cart, setCart] = useState([]);
@@ -12,20 +12,24 @@ useEffect(()=> {
   .then(data=> setCart(data))
 }, [refresh])
 
+
+
+
+  
+ 
+function handleSearch(e, search){
+  e.preventDefault()
+  setSearch(search)
+
+}
+
 const cartNum = cart.map((product)=> product.number) 
 
 function totalItems(){
   let itemNum = 0;
   for (let i = 0; i < cartNum.length; i++){
     itemNum += cartNum[i]
-  }
-  
-  return itemNum
-}
-function handleSearch(e, search){
-  e.preventDefault()
-  setSearch(search)
-  
+  } return itemNum
 }
 
     return(
@@ -33,6 +37,7 @@ function handleSearch(e, search){
       <nav className="nav">
         <a className="logo" href="/"> The Everyday Lady </a>
         <ul className="nav-links">
+        <li><a href="#">About</a></li>
       <li><a href="/home"> Home</a></li>
       <li><a href="/lifestyle"> Lifestyle</a></li>
       <li><a href="/clothing"> Clothing</a></li>

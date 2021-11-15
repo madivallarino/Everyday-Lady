@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import picture from './picture.webp'
+// import picture from './picture.webp'
 
 function SignupLogin({onLogin, handleLogout}) {
     const [email, setEmail] = useState("");
@@ -38,11 +38,11 @@ function SignupLogin({onLogin, handleLogout}) {
                 email,
                 password,
                 password_confirmation: passwordConfirmation,
-                name: name,
+                name,
             }),
         })
             .then((r) => r.json())
-            .then(data => onLogin(data));
+            .then(data => console.log(data));
     }
 
     // function handleChange(event) {
@@ -53,7 +53,7 @@ function SignupLogin({onLogin, handleLogout}) {
     return (
         <div className="holdsall">
         <div className="signinpicture">
-        <   img src={picture} alt="picture"/>
+        {/* <   img src={picture} alt="picture"/> */}
         </div>
         <div className="formcontainer">
             <label>Sign In</label><br/>

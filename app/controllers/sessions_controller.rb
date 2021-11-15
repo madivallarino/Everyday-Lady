@@ -1,19 +1,26 @@
 class SessionsController < ApplicationController
-    skip_before_action :authorize, only: :create
+    skip_before_action :authorize, only: [:create, :delete_cart]
 
     def create 
         user = User.find_by(email: params[:email])
+        
         if user&.authenticate(params[:password])
             session[:user_id] = user.id
-            user.items << session[:cart]
-            byebug
-            render json: {user: user, items: user.items}, status: :created
+            user.items << (session[:cart])
+            user.save
+            render json: user, status: :created
         else
             render json: {error: {login: "Invalid email or password"}}
         end
     end
 
+    def delete_cart
+        session.delete(:cart)
+    
+    end
+
     def destroy
+      
         session.delete :user_id
         head :no_content
     end
