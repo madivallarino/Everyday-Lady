@@ -133,7 +133,8 @@ function completeOrder(e){
  function orderPage(e){
      window.location.href="/orders"
  }
-
+ 
+console.log(user)
     return(
     <div className="cartpage">
         <div className="cartheader"> 
@@ -146,9 +147,10 @@ function completeOrder(e){
             </div>
             
             <div className="payandlogin">
-                <h2>Please Sign In To Continue:</h2>
-            <div className="loginform">
+                {/* {show ?   `Hey ${user.name}!`: null} */}
+            <div className={show ?  "closed" : "loginform"}>
                     <div className="login">
+                    <h2>Please Sign In To Continue:</h2>
                             <form onSubmit={handleLogin}>
                                     <label>Email:</label>
                                     <input
@@ -168,7 +170,7 @@ function completeOrder(e){
                             </form>
 
                     </div>
-                    <div className="sign">
+                    <div className={show ? "closed":"sign"}>
                         <form onSubmit={handleSignup}>
                             <div>
                             <label htmlFor="name">Your Name:</label>
@@ -210,7 +212,7 @@ function completeOrder(e){
                             onChange={(e) => setPasswordConfirmation(e.target.value)}
                             />
                             </div>
-                            <button type="submit">Sign Up</button>
+                            <button type="submit" onClick={handleToggle}>Sign Up</button>
                         </form>
                     </div>
                 </div>

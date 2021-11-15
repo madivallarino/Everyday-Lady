@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
         
         if user&.authenticate(params[:password])
             session[:user_id] = user.id
-            user.items << (session[:cart])
+            user.items = (session[:cart])
             user.save
             render json: user, status: :created
         else
@@ -15,12 +15,15 @@ class SessionsController < ApplicationController
     end
 
     def delete_cart
+       
         session.delete(:cart)
     
     end
 
     def destroy
-      
+        user = User.find(session[:user_id])
+        user.orders = user.items
+        user.save
         session.delete :user_id
         head :no_content
     end

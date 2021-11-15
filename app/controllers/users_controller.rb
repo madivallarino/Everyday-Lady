@@ -9,7 +9,7 @@ class UsersController < ApplicationController
         
         if user
         session[:user_id] = user.id
-        user.items << session[:cart]
+        user.items = session[:cart]
         user.save
         render json: user, status: :created
         

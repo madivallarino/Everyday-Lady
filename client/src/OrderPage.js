@@ -3,6 +3,7 @@ import React from 'react';
 import OrderCard from './OrderCard'
 function OrderPage(){
     const [ lastItem, setLastItem ] = useState([])
+    const [ pastOrder, setPastOrder ] = useState([])
     const [allProducts, setAllProducts ] = useState([])
     const [userID, setUserID ] = useState("")
     const [name, setName] = useState("")
@@ -19,10 +20,11 @@ useEffect(()=> {
     fetch('/me')
     .then(r=> r.json())
     .then(data=> {
-        console.log(data)
+       console.log(data)
         setName(data.name)
         setUserID(data.id)
-        setLastItem(data.items.slice(-1))})
+        setPastOrder(data.orders)
+        setLastItem(data.items)})
 },[])
 
 function orderedItems(array1, cats){
@@ -30,24 +32,51 @@ function orderedItems(array1, cats){
     let answer = []
     for(const element of array2){
     for (const ele of element){
-        for (const star of ele){ 
-          mapOfAllProducts(cats, answer, star)
-            // return mapOfAllProducts(cats, star)
-            }
+     mapOfAllProducts(cats, answer, ele)
+           
     }}
  return answer
 }
 function mapOfAllProducts(cats, answer, dog){
-    let mutt = parseInt(dog)
+  let mutt = parseInt(dog)
         cats.map((cat)=> {
-        if (cat.id === mutt){
+        if (cat.id === mutt){ 
                 answer.push(cat)
         } 
     })
     return answer 
 }
-// console.l
+
+function orderNumber(arr1){
+    let arr2 = Object.entries(arr1)
+    let orderNum = "#"
+    for (const element of arr2){
+       for (const ele of element){
+           orderNum += ele
+       }
+    }
+    return orderNum
+}
+
+
+let recentOrder = orderedItems(pastOrder, allProducts)
 let orders = orderedItems(lastItem, allProducts)
+
+const listofPastOrders = recentOrder.map((product)=> {
+    return ( 
+        <OrderCard
+            name={product.name} 
+            price={product.price} 
+            image={product.image} 
+            color={product.color} 
+            back_image={product.back_image} 
+            id={product.id}
+            key={product.id}
+            userID={userID}
+        />
+    )
+})
+
 
 const listOforders = orders.map((product)=> {
     return( 
@@ -99,6 +128,8 @@ const prices =  orders.map((product)=> product.price * product.number)
                 <div className="profile">
                     <h1>{name}</h1> <br/>
                     <br/> <h2>Your Order History:</h2>
+                    <h2>Order {orderNumber(pastOrder)}</h2>
+                    <h3>{listofPastOrders}</h3>
                     <button onClick={handleLogout}>Logout</button>
                 </div>
             </div>

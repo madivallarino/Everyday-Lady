@@ -44,19 +44,28 @@ function HomeProducts(){
         <div className="everythingcontainer">
         <div className="pagecontainer">
             <div className="sidebar">
+            <div className="typeFilter">
+            <h3>Filter By Type: </h3>
+              <p> <input type="checkbox" value="Tops"/> Kitchen/Living </p> 
+                <p>  <input type="checkbox" value="Bottoms"/> Lighting</p>
+                <p> <input type="checkbox" value="Dress"/> Bath</p>
+            <p> <input type="checkbox" value="Sweater" /> Decor </p>
+           <p> <input type="checkbox" value="Jacket"/> Furniture </p>
+           
+            </div>
             <div className="colorFilter">
                 <h3>Filter By Color: </h3>
-                    <p> Black <input type="checkbox" id={"Black"} value="Black" onChange={(event)=> setFilterColor(event.target.value)} /> </p> 
-                    <p>White <input type="checkbox"id={"White"} value="White" onChange={(event)=> setFilterColor(event.target.value)} /> </p>
-                    <p>Multi <input type="checkbox" id={"Multi"} value="Multi" onChange={(event)=> setFilterColor(event.target.value)} /> </p>
-                    <p> Grey <input type="checkbox" id={"Grey"} value="Grey" onChange={(event)=> setFilterColor(event.target.value)} /></p>
+                    <p>  <input type="checkbox" id={"Black"} value="Black" onChange={(event)=> setFilterColor(event.target.value)} /> Black</p> 
+                    <p><input type="checkbox"id={"White"} value="White" onChange={(event)=> setFilterColor(event.target.value)} /> White</p>
+                    <p> <input type="checkbox" id={"Multi"} value="Multi" onChange={(event)=> setFilterColor(event.target.value)} /> Multi</p>
+                    <p> <input type="checkbox" id={"Grey"} value="Grey" onChange={(event)=> setFilterColor(event.target.value)} /> Grey</p>
         </div>
         <div className="priceFilter">
         <h3>Filter By Price: </h3>
-          <p> Under $25 <input type="checkbox" value="1"/> </p> 
-            <p> $25-$50 <input type="checkbox" value="2"/> </p>
-        <p> Under $150 <input type="checkbox" value="3" /> </p>
-       <p> $150+ <input type="checkbox" value="4"/></p>
+          <p>  <input type="checkbox" value="1"/> Under $25</p> 
+            <p> <input type="checkbox" value="2"/> $25 - $50</p>
+        <p>  <input type="checkbox" value="3" /> Under $150</p>
+       <p> <input type="checkbox" value="4"/> $150+</p>
         </div>
             </div>
             <div className="itempage">

@@ -63,9 +63,10 @@ class ProductsController < ApplicationController
     #     end
 
 def remove_from_cart
-   
+
     id = params[:id]
     session[:cart].delete(id)
+  
 end
 
 # def update
