@@ -6,7 +6,7 @@ const [products, setProducts] = useState([])
 const [error, setError] = useState(null)
 
     useEffect(()=> {
-        fetch("/giftcards")
+        fetch("/giftcard")
         .then((resp)=> {
             if (resp.ok) return resp.json();
             throw new Error ('something went wrong while requesting products');
@@ -18,6 +18,7 @@ const [error, setError] = useState(null)
 
     const giftCards = products.map((product)=> {
         return (
+            <a href={`/products/${product.id}`}>
             <GiftProductCard 
             name={product.name} 
             price={product.price} 
@@ -26,6 +27,7 @@ const [error, setError] = useState(null)
             back_image={product.back_image} 
             id={product.id}
             key={product.id}/>
+            </a>
         )
     })
 

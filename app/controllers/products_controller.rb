@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-    skip_before_action :authorize, only: [:home_products, :show, :clothing_products, :lifestyle_products, :load_cart, :add_to_cart, :remove_from_cart, :index, :giftcards]
+    skip_before_action :authorize, only: [:home_products, :show, :clothing_products, :lifestyle_products, :load_cart, :add_to_cart, :remove_from_cart, :index, :giftcards, :sizeupdate, :quantity, :priceupdate]
     before_action  :initialize_session
     # before_action :load_cart
    
@@ -47,6 +47,18 @@ class ProductsController < ApplicationController
         # byebug
     end
 
+    def sizeupdate
+        product = Product.find_by(id: params[:id])
+        product.update(size: params[:size])
+        render json: product
+    end
+
+def priceupdate
+    product = Product.find_by(id: params[:id])
+    product.update(price: params[:price])
+    render json: product
+end
+
     def load_cart 
    
         if session[:cart] != nil
@@ -88,12 +100,10 @@ end
 def quantity
     # byebug
 product = Product.find_by(id: params[:id])
-if product 
+
     product.update(number: params[:number])
     render json: product
-else
-    render json: {error: "Item not found"}, status: :not_found
-end
+
 end
 
 

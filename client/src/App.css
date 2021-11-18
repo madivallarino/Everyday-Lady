@@ -300,6 +300,10 @@ button {
   transition: all 0.3s ease 0s;
 }
 
+.clicked{
+  background-color: #ECD8C7;
+}
+
 button:hover{
   background-color: #ECD8C7;
 }

@@ -84,11 +84,13 @@ function handleSignup(e) {
         name={product.name} 
         price={product.price} 
         image={product.image} 
+        category={product.category}
         color={product.color} 
         back_image={product.back_image} 
         id={product.id}
         key={product.id}
         number={product.number}
+        size={product.size}
         details={product.description}
         deleteFromCart={deleteFromCart}
         handleQuantity={handleQuantity}/>

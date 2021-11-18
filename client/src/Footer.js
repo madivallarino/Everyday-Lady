@@ -26,7 +26,7 @@ const [show, setShow ] = useState(false)
           <h3>Quick Links</h3>
           <ul>
             <li>Brands</li>
-            <a href="/giftcards"><li>Gift Cards</li></a>
+            <a href="/giftcard"><li>Gift Cards</li></a>
             <li>Careers</li>
           </ul>
         </div>

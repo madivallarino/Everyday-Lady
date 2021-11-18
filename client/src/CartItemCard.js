@@ -1,5 +1,5 @@
 function CartItemCard(props){
-    const {  name, price, image, id, deleteFromCart, number, handleQuantity, details} = props
+    const {  name, price, image, id, deleteFromCart, number, handleQuantity, details, category, size} = props
   
     return(
         <div className="cartcard">
@@ -11,7 +11,8 @@ function CartItemCard(props){
            
                 <h2>{name}</h2>
                 <p>{details}</p>
-                <h3>${price}</h3>
+                {category === "clothing" ? <div><h3>Size: {size}</h3></div> : null}
+               {category === "giftcard" ? <h3>Amount: ${price} </h3>:<h3>${price}</h3>} 
             <label>Quantity:</label>
             <select onChange={(e)=>handleQuantity(e.target.value, id)}>
             <option>{number}</option>

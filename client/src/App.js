@@ -147,7 +147,7 @@ function totalItems(){
                 <Route path="/returnpolicy">
                   <ReturnPolicy />
                   </Route>
-                <Route path='/giftcards'>
+                <Route path='/giftcard'>
                   <GiftCards />
                   </Route>
           <Route path="/login">

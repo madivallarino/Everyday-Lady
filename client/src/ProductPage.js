@@ -10,6 +10,9 @@ const [allReviews, setAllReviews] = useState([]);
 const [allProducts, setAllProducts] = useState([]);
 const [reviewText, setReviewText ] = useState("");
 const [mainImage, setMainImage] = useState(false)
+const [clicked, setClicked ] = useState(false)
+const [secondClicked, setSecondClicked] = useState(false)
+const [thirdClicked, setThirdClicked ] = useState(false)
 const [name, setUserName] = useState("");
 // let history = useHistory();
 
@@ -88,8 +91,27 @@ function handleCart(product){
     })
 }
 
+function handleSize(e, id){
+    e.preventDefault()
+    fetch(`/sizeupdate/${id}`, {
+        method: "PATCH", 
+        headers: {
+            "Content-Type": "application/json",
+        }, body: JSON.stringify({size: e.target.value})
+    }).then((r)=> r.json())
+        .then(data => console.log(data))
+}
 
-
+function handleAmount(e, id){
+    let num = parseInt(e)
+    fetch(`/priceupdate/${id}`, {
+        method: "PATCH", 
+        headers: {
+            "Content-Type": "application/json",
+        }, body: JSON.stringify({price: num})
+    }).then((r)=> r.json())
+        .then(data => console.log(data))
+}
 
 
 
@@ -133,9 +155,32 @@ function sideImages(arr, num1, num2){
                         <h3>Description:</h3>
                         <p>{product.description}</p>
                         {/* <a href="#">Add to Wish List</a> */}
-                        <h3 className="productcolor">Color: {product.color}</h3>
-                        <h3>Size</h3>
-                        <button>S</button><button>M</button><button>L</button>
+                        {product.category === "giftcard" ? null : <h3 className="productcolor">Color: {product.color}</h3>}
+                        {product.category === "giftcard" ? 
+                        <div>
+                            <h3>Amount</h3>
+                            <button value="25" onClick={(e)=> handleAmount(e.target.value, product.id)}>$25</button>
+                            <button value="50" onClick={(e)=> handleAmount(e.target.value, product.id)}>$50</button>
+                            <button value="75"onClick={(e)=> handleAmount(e.target.value, product.id)}>$75</button>
+                            <button value="100" onClick={(e)=> handleAmount(e.target.value, product.id)}>$100</button>
+                            <button value="150" onClick={(e)=> handleAmount(e.target.value, product.id)}>$150</button>
+                            <h3>Recipient's Name</h3>
+                            <input></input>
+                            <h3>Recipient's Email Address</h3>
+                            <input></input>
+                            <h3>Gift Message</h3>
+                            <textbox></textbox>
+                        </div> 
+                        : null}
+
+
+
+                        {product.category === "clothing" ? <div> <h3>Size</h3>
+                        <button onClick={(e)=> handleSize(e, product.id)} value="S" onClick={()=> setClicked(!clicked)} className={clicked ? "clicked" : null}>S</button>
+                        <button onClick={(e)=> handleSize(e, product.id)} value="M" onClick={()=> setSecondClicked(!clicked)} className={secondClicked ? "clicked" : null}>M</button>
+                        <button onClick={(e)=> handleSize(e, product.id)} value="L" onClick={()=> setThirdClicked(!clicked)} className={thirdClicked ? "clicked" : null}>L</button>
+                        </div> : null}
+                        
                     </div>
                     {/* <h2>${product.price}.00</h2> */}
                     <button onClick={()=> handleCart(product)} className="productbutton">Add to Bag</button>
