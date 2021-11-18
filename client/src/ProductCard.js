@@ -10,7 +10,7 @@ function ProductCard(props){
         
         <img src={image} alt="product image"/>
         <h4 className="product-name">{name}</h4>
-        <h5>${price}</h5>
+        <h5 className="product-name">${price}</h5>
         </span>
         </div>
     )

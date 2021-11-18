@@ -5,6 +5,7 @@ import {useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import LandingPageCard from './LandingPageCard';
 import picture from './picture.webp'
+import fall from './fall.jpeg'
 import alady from './alady.gif'
 function LandingPage(){
 const [clothing, setClothing] = useState([]);
@@ -46,15 +47,16 @@ function sideImages(array, num1, num2){
     return newClothing
 } 
 
-
-
+//the ad if nothing else works
+// https://www.evernew.ca/media/wysiwyg/AUNZ-SkinnyBanner-DT_2x_4.png
 
 
     return(
         <>
         <div className="everythingbox">
         <div className="ad5">
-                <img src="https://www.evernew.ca/media/wysiwyg/AUNZ-SkinnyBanner-DT_2x_4.png" alt="ad3"/>
+            <a href="/lifestyle">
+                <img src="https://images.ctfassets.net/5de70he6op10/6kBL1V74MuW99MCopainQJ/130a9b3320ad002372a3146aaefb43a4/30_off_entertaining__SECONDARY_BANNER_ends_tonight.jpg?w=2882&q=80&fm=webp" alt="ad3"/> </a>
                 </div>
         <div className="topbox">
             <div className="topbox1">
@@ -76,11 +78,11 @@ function sideImages(array, num1, num2){
                     </div>
                  </div>
                 <div className="sideimages"> 
-                {sideImages(clothing,2,6)}
+                {sideImages(clothing,3,7)}
                 </div>
             </div>
             <a href="/clothing"><div className="ad1">
-                <img src="https://li0.rightinthebox.com/imagegy/202101/7c6a233dcbba460a8d146449989b0e15en3.jpg" />
+                <img src="https://li0.rightinthebox.com/imagegy/202101/a141e622114d4e5c8a494a256b8ba056en5.jpg" />
             </div></a>
     </div>
     <div className="middlebox">
@@ -89,18 +91,18 @@ function sideImages(array, num1, num2){
         <div className="middlebox1"> 
         {sideImages(clothing,30,34)}
         </div>
-        <a href="/clothing"> <div className="ad2">
-          <img src="https://li0.rightinthebox.com/imagegy/202101/a141e622114d4e5c8a494a256b8ba056en5.jpg" alt="ad2" />
+        <a href="/lifestyle"> <div className="ad2">
+          <img src="https://m.media-amazon.com/images/G/01/2021/homepage11.01/HOMEPAGE-HERO-GIFT-GUIDE-BANNER-1440x250.png" alt="ad2" />
         </div></a>
-           
+        
 
         <div className="middlebox2">
 
         {sideImages(clothing,12,16)}            
         </div>
-        <a href="/lifestyle"> <div className="ad3">
-           <img src=" https://m.media-amazon.com/images/G/01/2021/homepage11.01/HOMEPAGE-HERO-GIFT-GUIDE-BANNER-1440x250.png" alt="ad" />
-        </div></a>
+         <div className="ad3"><a href="/clothing">
+           <img src="https://li0.rightinthebox.com/imagegy/202101/7c6a233dcbba460a8d146449989b0e15en3.jpg" alt="ad" />
+        </a></div>
     </div>
    
     

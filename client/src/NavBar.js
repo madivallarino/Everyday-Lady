@@ -33,15 +33,20 @@ function totalItems(){
 }
 
     return(
-      <>
+    
       <nav className="nav">
+        <div className="companyheader">
         <a className="logo" href="/"> The Everyday Lady </a>
+        </div>
+        <div className="companylinks">
         <ul className="nav-links">
-        <li><a href="/about">About</a></li>
-      <li><a href="/home"> Home</a></li>
-      <li><a href="/lifestyle"> Lifestyle</a></li>
-      <li><a href="/clothing"> Clothing</a></li>
+        <a href="/about"> <li>About</li></a>
+        <a href="/home"><li> Home</li> </a>
+        <a href="/lifestyle"><li> Lifestyle</li></a>
+        <a href="/clothing"><li> Clothing</li></a>
         </ul>
+        </div>
+        <div className="searchbarandcart">
         <form className="searchbar" onSubmit={handleSearch}>
       <input
         type="text"
@@ -50,43 +55,24 @@ function totalItems(){
         value={search}
         placeholder="Search ..."
       onChange={(e)=> setSearch(e.target.value)}/>
-      {/* <a href="#"><input type="submit"/></a> */}
-       {/* <button onClick="location.href='/home">🔍</button> */}
+    
     </form>
-        <a className="cta" href="/cart"><p>{totalItems()}</p><img src="https://toppng.com/uploads/preview/freebag-vector-retail-shopping-cart-bag-icon-11553505193l9s1kngqvt.png"alt="cart" className="cartlogo"/></a>
-       
-       
+        <a className="cta" href="/cart"><p> {totalItems()} </p> <img src="https://toppng.com/uploads/preview/freebag-vector-retail-shopping-cart-bag-icon-11553505193l9s1kngqvt.png"alt="cart" className="cartlogo"/></a> 
+        </div>
       </nav>
         
-      </>
+    
     )
 }
 
 export default NavBar;
 
 
-// <div className="nav-bar-header">
-// <nav>
-// <a className="company-logo" href="/">
-//    The Everyday Lady
-// </a> 
-// <ul className="">
-// <li><a href="/signup"><span className=""></span> Sign Up</a></li>
-// <li><a href="/login"><span className=""></span> Login</a></li>
-// </ul>
-// </nav>
-// </div>
-// <div className="">
-// <nav className="">
-// <ul className="nav nav-tabs">
-// <li className="active"><a href="/home">HOME</a></li>
-// <li><a href="#">LIFESTYLE</a></li>
-// <li><a href="#">CLOTHING</a></li>
-// </ul>
-// <a className="cart-logo" href="/cart">
-// <span class="glyphicon glyphicon-shopping-cart"></span>
-// </a> 
-// <a></a>
-
-// </nav>
-// </div>
+{/* <a className="logo" href="/"> The Everyday Lady </a>
+        <ul className="nav-links">
+        <li><a href="/about">About</a></li>
+      <li><a href="/home"> Home</a></li>
+      <li><a href="/lifestyle"> Lifestyle</a></li>
+      <li><a href="/clothing"> Clothing</a></li>
+        </ul> */}
+        

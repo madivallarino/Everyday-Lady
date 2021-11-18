@@ -1,16 +1,22 @@
-function Footer(){
+import React, { useState } from 'react';
+ import OrderStatus from './OrderStatus'
 
+function Footer(){
+const [show, setShow ] = useState(false)
 
 
 
     return(
         <div className="footer">
+          <div className={show ? "modal" : "closed"}>
+            <OrderStatus onClose={()=> setShow(!show)}/> 
+          </div>
         <div>
           <h3>Help</h3>
           <ul>
-            <li>Order Status</li>
+            <a  onClick={()=> setShow(!show)}><li>Order Status</li></a>
             <li>Start A Return Or Exchange</li>
-            <li>Returns + Exchanges</li>
+            <a href='/returnpolicy'><li>Returns + Exchanges</li></a>
             <li>Shipping</li>
             <li>Orders + Payments</li>
             <li>FAQ</li>
@@ -20,7 +26,7 @@ function Footer(){
           <h3>Quick Links</h3>
           <ul>
             <li>Brands</li>
-            <li>Gift Cards</li>
+            <a href="/giftcards"><li>Gift Cards</li></a>
             <li>Careers</li>
           </ul>
         </div>

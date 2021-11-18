@@ -6,13 +6,14 @@ Rails.application.routes.draw do
   get "/home", to: "products#home_products"
   get "/clothing", to: "products#clothing_products"
   get "/lifestyle", to: "products#lifestyle_products"
+  get "/giftcards", to: "products#giftcards"
   get "/allproducts", to: "products#index"
   get '/cart', to: "products#load_cart"
   post "/login", to: "sessions#create"
   post "/signup", to: "users#create"
   post '/reviews', to: "reviews#create"
   post "/products/add_to_cart/:id", to: 'products#add_to_cart'
-  delete '/products/remove_from_cart/:id', to: 'products#remove_from_cart'
+  delete '/remove_from_cart/:id', to: 'products#remove_from_cart'
   patch '/users/cart:id', to: 'users#update'
   delete '/empty_cart', to: 'sessions#delete_cart'
   patch "/quantity/:id", to: 'products#quantity'

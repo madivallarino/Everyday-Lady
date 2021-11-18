@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_15_225328) do
+ActiveRecord::Schema.define(version: 2021_11_18_032800) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 2021_11_15_225328) do
     t.integer "quantity"
     t.integer "number"
     t.string "subclass"
+    t.string "size"
   end
 
   create_table "reviews", force: :cascade do |t|

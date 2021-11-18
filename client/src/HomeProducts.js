@@ -4,7 +4,9 @@ import ProductCard from './ProductCard';
 
 function HomeProducts(){
     const [products, setProducts] = useState([])
-    const [filterColor, setFilterColor] = useState('');
+    const [filterColor, setFilterColor] = useState(null);
+    const [filterPrice, setFilterPrice] = useState(null);
+    const [filterType, setFilterType ] = useState(null);
     const [error, setError] = useState('');
 
 
@@ -33,9 +35,114 @@ function HomeProducts(){
         )
     })
    
-  function priceFilter(){
-      
-  }
+    function priceFilter(){
+        if (filterPrice == "1"){
+            return products.filter((product)=> (product.price < 25 ) ).map((product)=> {
+                return(
+                <Link to={`/products/${product.id}`}>
+                <ProductCard 
+                   name={product.name} 
+                   price={product.price} 
+                   image={product.image} 
+                   color={product.color} 
+                   back_image={product.back_image} 
+                   id={product.id}/>
+                 </Link>
+                )
+            })
+        }else if (filterPrice == "2"){
+           return products.filter((product)=> (product.price < 50 && product.price > 25)).map((product)=> {
+                return(
+                    <Link to={`/products/${product.id}`}>
+                    <ProductCard 
+                       name={product.name} 
+                       price={product.price} 
+                       image={product.image} 
+                       color={product.color} 
+                       back_image={product.back_image} 
+                       id={product.id}/>
+                     </Link>
+                )
+            })
+        }else if (filterPrice == "3"){
+            return products.filter((product)=> (product.price < 150 && product.price > 50)).map((product)=> {
+                return(
+                    <Link to={`/products/${product.id}`}>
+                    <ProductCard 
+                       name={product.name} 
+                       price={product.price} 
+                       image={product.image} 
+                       color={product.color} 
+                       back_image={product.back_image} 
+                       id={product.id}/>
+                     </Link>
+                )
+            })
+        }else{
+           return products.filter((product)=> product.price > 150).map((product)=> {
+                return (
+                    <Link to={`/products/${product.id}`}>
+                    <ProductCard 
+                       name={product.name} 
+                       price={product.price} 
+                       image={product.image} 
+                       color={product.color} 
+                       back_image={product.back_image} 
+                       id={product.id}/>
+                     </Link>
+                )
+            })
+        }
+    }
+
+    function filterProducts(){
+        
+        if (filterType != null){
+           return products.filter((product)=> product.subclass.includes(filterType)).map((product)=> {
+                return ( 
+                    <Link to={`/products/${product.id}`}>
+                         <ProductCard 
+                            name={product.name} 
+                            price={product.price} 
+                            image={product.image} 
+                            color={product.color} 
+                            back_image={product.back_image} 
+                            id={product.id}/>
+                    </Link>
+                )}) 
+    }else if (filterColor != null){
+        return products.filter((product)=> product.color.includes(filterColor)).map((product)=> {
+            return (
+                <Link to={`/products/${product.id}`}>
+                         <ProductCard 
+                            name={product.name} 
+                            price={product.price} 
+                            image={product.image} 
+                            color={product.color} 
+                            back_image={product.back_image} 
+                            id={product.id}/>
+                    </Link>
+            )
+        })
+    } else if (filterPrice != null){
+
+        return priceFilter()
+
+    }else {
+        return products.map((product)=> {
+            return (
+                 <Link to={`/products/${product.id}`}>
+        <ProductCard 
+        name={product.name} 
+        price={product.price} 
+        image={product.image} 
+        color={product.color} 
+        back_image={product.back_image} 
+        id={product.id}/>
+        </Link>
+            )
+        })
+    }}
 
 
 
@@ -46,11 +153,11 @@ function HomeProducts(){
             <div className="sidebar">
             <div className="typeFilter">
             <h3>Filter By Type: </h3>
-              <p> <input type="checkbox" value="Tops"/> Kitchen/Living </p> 
-                <p>  <input type="checkbox" value="Bottoms"/> Lighting</p>
-                <p> <input type="checkbox" value="Dress"/> Bath</p>
-            <p> <input type="checkbox" value="Sweater" /> Decor </p>
-           <p> <input type="checkbox" value="Jacket"/> Furniture </p>
+              <p> <input type="checkbox" value="Living"onChange={(e)=> setFilterType(e.target.value)}/> Kitchen/Living </p> 
+                <p>  <input type="checkbox" value="Lighting" onChange={(e)=> setFilterType(e.target.value)}/> Lighting</p>
+                <p> <input type="checkbox" value="Bath" onChange={(e)=> setFilterType(e.target.value)}/> Bath</p>
+            <p> <input type="checkbox" value="Decor" onChange={(e)=> setFilterType(e.target.value)}/> Decor </p>
+           <p> <input type="checkbox" value="Furniture" onChange={(e)=> setFilterType(e.target.value)}/> Furniture </p>
            
             </div>
             <div className="colorFilter">
@@ -62,39 +169,14 @@ function HomeProducts(){
         </div>
         <div className="priceFilter">
         <h3>Filter By Price: </h3>
-          <p>  <input type="checkbox" value="1"/> Under $25</p> 
-            <p> <input type="checkbox" value="2"/> $25 - $50</p>
-        <p>  <input type="checkbox" value="3" /> Under $150</p>
-       <p> <input type="checkbox" value="4"/> $150+</p>
+          <p>  <input type="checkbox" value="1" onChange={(e)=> setFilterPrice(e.target.value)}/> Under $25</p> 
+            <p> <input type="checkbox" value="2" onChange={(e)=> setFilterPrice(e.target.value)}/> $25 - $50</p>
+        <p>  <input type="checkbox" value="3" onChange={(e)=> setFilterPrice(e.target.value)}/> Under $150</p>
+       <p> <input type="checkbox" value="4"onChange={(e)=> setFilterPrice(e.target.value)}/> $150+</p>
         </div>
             </div>
             <div className="itempage">
-            { filterColor ? 
-        products.filter((product)=> product.color.includes(filterColor)).map((product)=> {
-            return ( 
-                <Link to={`/products/${product.id}`}>
-                     <ProductCard 
-                        name={product.name} 
-                        price={product.price} 
-                        image={product.image} 
-                        color={product.color} 
-                        back_image={product.back_image} 
-                        id={product.id}/>
-                </Link>
-            )
-            }) : products.map((product)=> {
-            return ( 
-            <Link to={`/products/${product.id}`}>
-                    <ProductCard 
-                        name={product.name} 
-                        price={product.price} 
-                        image={product.image} 
-                        color={product.color} 
-                        back_image={product.back_image} 
-                        d={product.id}/>
-            </Link>
-        )
-         })}
+            {filterProducts()}
             </div>
         </div>
         <div className="reviewcontainer"></div>

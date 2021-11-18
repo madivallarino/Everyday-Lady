@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import React from 'react';
 import OrderCard from './OrderCard'
+import OrderedItem from './OrderedItem'
 function OrderPage(){
     const [ lastItem, setLastItem ] = useState([])
     const [ pastOrder, setPastOrder ] = useState([])
@@ -20,7 +21,6 @@ useEffect(()=> {
     fetch('/me')
     .then(r=> r.json())
     .then(data=> {
-       console.log(data)
         setName(data.name)
         setUserID(data.id)
         setPastOrder(data.orders)
@@ -78,12 +78,15 @@ const listofPastOrders = recentOrder.map((product)=> {
 })
 
 
+
+
 const listOforders = orders.map((product)=> {
     return( 
-        <OrderCard
+        <OrderedItem
             name={product.name} 
             price={product.price} 
-            image={product.image} 
+            image={product.image}
+            number={product.number} 
             color={product.color} 
             back_image={product.back_image} 
             id={product.id}
@@ -116,27 +119,74 @@ const prices =  orders.map((product)=> product.price * product.number)
 
     return(
         <div className="containerholder">
-            
-            <div className="left">
-            <h3>Thank You for Your Order!</h3>
-                <h2>You ordered: {listOforders} </h2>
+             <div className="namebanner">
+                <h1>Welcome Back, {name}! <button onClick={handleLogout}>Logout</button></h1>
+             </div>
+        <div className="profile">
+            <div className="justordered">
+                <div className="titlebanner">
+                <h1 >Just Ordered</h1>
+            <h3>Order Number {orderNumber(lastItem)}</h3>
+                </div>
+                <div className="ordercontainer">
+                    <div className="orderholder">
+                    {listOforders}
+                    </div>
+        
+                </div>
+                <h2>Total: $ {totalPrice()}.00</h2>
+                <h4>*Please allow 3-5 days for processing & shipping*</h4>
             </div>
-
-
-            <div className="right">
-                <h3>Your Profile: </h3>
-                <div className="profile">
-                    <h1>{name}</h1> <br/>
-                    <br/> <h2>Your Order History:</h2>
-                    <h2>Order {orderNumber(pastOrder)}</h2>
-                    <h3>{listofPastOrders}</h3>
-                    <button onClick={handleLogout}>Logout</button>
+            <div className="pastorders">
+            <div className="titlebanner">
+            <h1 >Previously Ordered</h1>
+            <h2>Order Number {orderNumber(pastOrder)}</h2>
+            </div>
+                <div className="ordercontainer">
+                    <div className="orderholder">
+                    {listofPastOrders}
+                    </div>
                 </div>
             </div>
-      
+        </div>
+            
         </div>
     )
 }
 
 export default OrderPage;
 
+{/* <div className="profile">
+<div className="justordered">
+    <h1 >You just ordered</h1>
+    <h2>Order Number {orderNumber(lastItem)}</h2>
+    <div className="ordereditems">
+        
+        <div className="orderedlist">
+            {listOforders}
+            <div className="totalinfo">
+            <h2>Total: $ {totalPrice()}.00</h2>
+            <div className="infoshipping">
+            
+        </div>
+        </div>
+        </div>
+        <div className="shippinginfo">
+        
+        
+        </div>
+    </div>
+    
+</div>
+<div className="pastorders">
+    <h1>Your order history</h1>
+    <h2>Order Number {orderNumber(pastOrder)}</h2>
+    <div className="pastorderitems">
+    
+    <div className="singlepastorder">
+        
+    {listofPastOrders}
+    </div>
+    </div>
+</div>
+</div> */}

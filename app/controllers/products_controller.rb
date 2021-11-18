@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-    skip_before_action :authorize, only: [:home_products, :show, :clothing_products, :lifestyle_products, :load_cart, :add_to_cart, :remove_from_cart, :index]
+    skip_before_action :authorize, only: [:home_products, :show, :clothing_products, :lifestyle_products, :load_cart, :add_to_cart, :remove_from_cart, :index, :giftcards]
     before_action  :initialize_session
     # before_action :load_cart
    
@@ -33,6 +33,10 @@ class ProductsController < ApplicationController
         render json: products 
     end
 
+    def giftcards
+        products = Product.where(category: "giftcard")
+        render json: products
+    end
 
     def add_to_cart
         id = params[:id]
@@ -63,10 +67,10 @@ class ProductsController < ApplicationController
     #     end
 
 def remove_from_cart
-
+  
     id = params[:id]
     session[:cart].delete(id)
-  
+    # render json: session[:cart]
 end
 
 # def update

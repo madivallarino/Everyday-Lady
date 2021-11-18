@@ -6,9 +6,11 @@ import ClothingProducts from './ClothingProducts';
 import LifestyleProducts from './LifestyleProducts';
 import CartPage from './CartPage';
 import OrderPage from './OrderPage';
+import GiftCards from './GiftCards';
 import ProductCard from './ProductCard';
 import ProductPage from './ProductPage';
 import SignupLogin from './SignupLogin';
+import ReturnPolicy from './ReturnPolicy'
 import About from './About';
 // import Login from './Login';
 import Footer from './Footer';
@@ -57,8 +59,10 @@ function handleSearch(){
   let searchWord = search.toLowerCase()
   let searchedProducts = allProducts.filter((product)=> product.name.toLowerCase().includes(searchWord)).map((product)=> {
     return (
+      <div className="searched">
       <a href={`/products/${product.id}`}>
   <ProductCard
+
               name={product.name} 
               price={product.price} 
               image={product.image} 
@@ -66,7 +70,7 @@ function handleSearch(){
               back_image={product.back_image} 
               id={product.id}
               key={product.id}/>
-   </a> 
+   </a> </div>
      )
   })
   return searchedProducts
@@ -118,12 +122,7 @@ function totalItems(){
 
   return (
     <div className="App">
-      <div className="signin">
-        {user ? `Hello ${user.name}` : <Link to={`/login`}>
-           {/* Sign In */}
-        </Link>}
-        
-      </div>
+      
       
       <NavBar search={search} setSearch={setSearch} refresh={refresh} setRefresh={setRefresh}/>
       {/* <button onClick={()=> setShow(show=> !show)}> View Cart</button> */}
@@ -145,6 +144,12 @@ function totalItems(){
               <Route path='/about'>
                 <About />
                 </Route>
+                <Route path="/returnpolicy">
+                  <ReturnPolicy />
+                  </Route>
+                <Route path='/giftcards'>
+                  <GiftCards />
+                  </Route>
           <Route path="/login">
             <SignupLogin onLogin={onLogin} handleLogout={handleLogout}/>
             </Route>
@@ -152,7 +157,7 @@ function totalItems(){
                   <OrderPage user={user}/>
                   </Route>
               <Route path="/cart">
-                <CartPage cart={cart} setUser={setUser} user={user} refresh={refresh} setRefresh={setRefresh} onLogin={onLogin}/>
+                <CartPage cart={cart} setUser={setUser} user={user} refresh={refresh} setRefresh={setRefresh} onLogin={onLogin} show={show} setShow={setShow}/>
                 </Route>
           <Route path="/products/:id">
             <ProductPage  refresh={refresh} setRefresh={setRefresh}/>

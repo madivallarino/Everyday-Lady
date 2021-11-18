@@ -2,10 +2,13 @@ import { useState, useEffect } from "react";
 import CartItemCard from './CartItemCard';
 // require 'pry';
 
-function CartPage({ user, setUser, refresh, setRefresh, onLogin}){
-const [cart, setCart ] = useState([])
-const [show, setShow ] = useState(false)
+function CartPage({ user, setUser, refresh, setRefresh, onLogin, show, setShow}){
+const [cart, setCart ] = useState([]);
+
+const [loginShow, setLoginShow ] = useState(false);
+const [signInShow, setSigninShow] = useState(false);
 const [email, setEmail] = useState("");
+const [discount, setDiscount] = useState(false);
     const [password, setPassword] = useState("");
     const [passwordConfirmation, setPasswordConfirmation] = useState("");
     const [newUser, setNewUser] = useState("");
@@ -20,7 +23,8 @@ const [email, setEmail] = useState("");
 
 
 function deleteFromCart(id){
-    fetch(`/products/remove_from_cart/${id}`, {
+    
+    fetch(`/remove_from_cart/${id}`, {
         method: "DELETE",
     }).then(setRefresh(!refresh))
 }
@@ -117,8 +121,16 @@ function handleSignup(e) {
      .then(data => {console.log(data)
                      setRefresh(!refresh)})
  }
-
-
+function handleDiscount(e){
+    e.preventDefault()
+    setDiscount(true)
+}
+function handleDiscountTotal(){
+    let total = totalPrice()
+    let discount = total * .25
+    let reduced = total - discount
+    return reduced
+}
 function completeOrder(e){
     handleOrder(e);
     window.location.reload();
@@ -134,32 +146,42 @@ function completeOrder(e){
      window.location.href="/orders"
  }
  
-console.log(user)
+function handleSignShow(){
+    setSigninShow(true)
+}
+
+function handleLoginShow(){
+    setLoginShow(true)
+}
+
+
     return(
     <div className="cartpage">
         <div className="cartheader"> 
-                    <h1>Your Shopping Basket:</h1>
-                    <h1>Checkout:</h1>
+                    <h1>Your Shopping Basket</h1>
+                    <h1>Checkout</h1>
         </div>
         <div className="maincart">
             <div className="orders">
                 {productList}
+                <h2>Total: ${totalPrice()}.00</h2>
             </div>
             
-            <div className="payandlogin">
-                {/* {show ?   `Hey ${user.name}!`: null} */}
+            <div className={show ? "payandlogout" : "payandlogin"}>
+    
             <div className={show ?  "closed" : "loginform"}>
                     <div className="login">
                     <h2>Please Sign In To Continue:</h2>
-                            <form onSubmit={handleLogin}>
-                                    <label>Email:</label>
+                    <button onClick={handleLoginShow} className={loginShow ? "closed" : "loginbutton"}>Login</button>
+                            <form onSubmit={handleLogin} className={loginShow ? "loginform": "closed"}>
+                                    <label>Email</label>
                                     <input
                                     type="text"
                                     value={loginEmail}
                                     onChange={(e) => setLoginEmail(e.target.value)}
                                     placeholder="Email.."
                                     /><br/>
-                                    <label>Password:</label>
+                                    <label>Password </label>
                                     <input
                                     type="password"
                                     value={loginPassword}
@@ -170,10 +192,11 @@ console.log(user)
                             </form>
 
                     </div>
-                    <div className={show ? "closed":"sign"}>
-                        <form onSubmit={handleSignup}>
+                    <div className={show ? "closed":"signin"}>
+                        <button onClick={handleSignShow}className={signInShow ? "closed" : "loginbutton"}>Signup</button>
+                        <form onSubmit={handleSignup} className={signInShow ? "signin" : "closed"}>
                             <div>
-                            <label htmlFor="name">Your Name:</label>
+                            <label htmlFor="name"> Your Name </label><br/>
                             <input
                             type="text"
                             name="name"
@@ -181,9 +204,9 @@ console.log(user)
                             placeholder="Name.."
                             onChange={(e)=> setNewUser(e.target.value)}
                             />
-                            </div>
+                            </div><br/>
                             <div>
-                            <label htmlFor="email">Email:</label>
+                            <label htmlFor="email">Email </label><br/>
                             <input
                             type="text"
                             name="email"
@@ -191,9 +214,9 @@ console.log(user)
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             />
-                            </div>
+                            </div><br/>
                             <div>
-                            <label htmlFor="password">Password:</label>
+                            <label htmlFor="password">Password </label><br/>
                             <input
                              type="password"
                             name="password"
@@ -201,9 +224,9 @@ console.log(user)
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             />
-                            </div>
+                            </div><br/>
                             <div>
-                            <label htmlFor="password_confirmation">Confirm Password:</label>
+                            <label htmlFor="password_confirmation">Confirm Password </label><br/>
                             <input
                             type="password"
                              name="password_confirmation"
@@ -211,21 +234,21 @@ console.log(user)
                             value={passwordConfirmation}
                             onChange={(e) => setPasswordConfirmation(e.target.value)}
                             />
-                            </div>
+                            </div><br/>
                             <button type="submit" onClick={handleToggle}>Sign Up</button>
                         </form>
                     </div>
                 </div>
-                <div className="payment">
-                    
-                    <label>Add Your Discount Code:</label><br/>
-                    <input></input><button>Apply</button>
-                    <h2>Your Total: ${totalPrice()}.00</h2>
+                <div className={show ? "paymentup" : "payment"}>
+                    <h1>{user ? `Hey ${user.name}` : null}!</h1>
+                    <label>Your Discount Code: </label>
+                    <form onSubmit={handleDiscount}>
+                    <input></input><button>Apply</button></form>
                     <p>Due to the coronavirus, please allow extra time for shipping</p>
+                    <p>*Furniture may take longer than other items*</p>
                 </div>
                
-                <br/>
-                <div className="checkout">
+                <div className={show ? "checkoutup" : "checkout"}>
                     <h3>Ready to Submit the Order?</h3>
                     <button onClick={completeOrder}>Pay & Checkout </button>
                 </div>

@@ -1,4 +1,4 @@
-import newyork from './newyork.jpeg'
+
 
 function About(){
 
@@ -6,17 +6,11 @@ function About(){
 
     return(
         <div className="holder">
-            <div className="missionbox">
-                <div className="missiontitle">
-                    <h1>Our Mission:</h1>
-                </div>
-                <div className="missionlist">
-                    We are locally owned, based out of Manhattan, New York. We strive to bring sustainable and eco-friendly products to women around the world, but especially to those in our city. We want to support the ladies that go on to support the world. Our everyday is for you.
-                </div>
-            </div>
-            <div className="picturebox">
-            <img src={newyork} alt="newyork"/>
-            </div>
+            <img src="https://media.everlane.com/image/upload/c_scale,dpr_1.0,f_auto,q_auto,w_auto/v1/i/89f45c02_bb65.jpg"/>
+            <h2>Our Mission</h2>
+            <h1>We believe we can all make a difference. </h1>
+            <h3>We are locally owned, based out of Manhattan, New York.<br/> We strive to bring sustainable and eco-friendly products to women around the world,<br/> but especially to those in our city. We want to support the ladies that go on to support the world.<br/> Our everyday is for you.</h3>
+           
             
         </div>
     )

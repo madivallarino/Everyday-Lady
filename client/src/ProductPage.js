@@ -2,11 +2,14 @@ import { useEffect, useState } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import Reviews from './Reviews'
 import ProductCard from './ProductCard';
+import LandingCard from './LandingCard';
+
 function ProductPage({refresh, setRefresh}){
 const [product, setProduct ] = useState([]);
 const [allReviews, setAllReviews] = useState([]);
+const [allProducts, setAllProducts] = useState([]);
 const [reviewText, setReviewText ] = useState("");
-
+const [mainImage, setMainImage] = useState(false)
 const [name, setUserName] = useState("");
 // let history = useHistory();
 
@@ -23,6 +26,9 @@ useEffect(()=> {
        return cats.map((cat)=> <Reviews cat={cat}/>)
    }
    
+   function handleToggle(){
+       console.log("This is firing")
+   }
 
 
 function handleAverage(){
@@ -54,6 +60,12 @@ useEffect(()=> {
         setProduct(data)
     })
 },[])
+
+useEffect(()=> {
+    fetch(`/${product.category}`)
+    .then((r)=> r.json())
+    .then(data=> setAllProducts(data))
+},[])
   
     function handleClick(){
         window.location.href=`/${product.category}`
@@ -72,6 +84,7 @@ function handleCart(product){
     .then((r)=> r.json())
     .then(data=> {
         setRefresh(!refresh)
+        window.location.href=`/${product.category}`
     })
 }
 
@@ -80,45 +93,69 @@ function handleCart(product){
 
 
 
+function sideImages(arr, num1, num2){
+    let newClothing = arr.slice(num1,num2).map((product)=> {
+     return (
+         <a href={`/products/${product.id}`}>
+     <LandingCard 
+                 name={product.name} 
+                 price={product.price} 
+                 image={product.image} 
+                 color={product.color} 
+                 back_image={product.back_image} 
+                 id={product.id}
+                 key={product.id}/>
+      </a> 
+        )
+             }
+     )
+     return newClothing
+ } 
+ 
+
+
 
     return(
         
        <div className="productpagecontainer">
            <div>
-             
-               <h4 className="sidetitle">
-               women's / <Link to={`/${product.category}`} className="categorylink">{product.category} </Link> </h4>
-               {/* <button onClick={handleClick} className="productbutton">Go Back</button> */}
-           </div>
-           <div className="title">
+          <div className="sidetitle">
                {product.name}
            </div>
+               {/* <h4 className="sidetitle">
+               women's / <Link to={`/${product.category}`} className="categorylink">{product.category} </Link> </h4>  */}
+               {/* <button onClick={handleClick} className="productbutton">Go Back</button> */}
+           </div>
+           
          <div className="mainbox">
          <div className="extras">
-
-<img src={product.image} />
-<br/>
-<img src={product.back_image} />     
+         <div className="details">
+                        <h3>Description:</h3>
+                        <p>{product.description}</p>
+                        {/* <a href="#">Add to Wish List</a> */}
+                        <h3 className="productcolor">Color: {product.color}</h3>
+                        <h3>Size</h3>
+                        <button>S</button><button>M</button><button>L</button>
+                    </div>
+                    {/* <h2>${product.price}.00</h2> */}
+                    <button onClick={()=> handleCart(product)} className="productbutton">Add to Bag</button>
+                    <div>
+                    <h4>Star Rating: <p>{handleAverage()}</p></h4>
+                    </div>
+   
 </div> 
-        
              <div className="boxtop">
                    
                     <div className="mainimage">
-                    <img src={product.image} />
+                    <img src={mainImage ? product.back_image : product.image} />
                     </div>
              </div>
              <div className="boxtop2">
-                    <h2>${product.price}.00</h2>
-                    <div className="details">
-                        <h3>Product Description:</h3>
-                        <p>{product.description}</p>
-                    </div>
-                    <h4>Star Rating:<h5>{handleAverage()}</h5></h4>
-                    <h3>Color: {product.color}</h3>
-                    <button onClick={()=> handleCart(product)}>Add to Bag</button>
-                    <a href="#">Add to Wish List</a>
-                      
-                    <h3>Shipping</h3>
+             <img src={product.image} onClick={()=> setMainImage(false)}/>
+<br/>
+<img src={product.back_image} onClick={()=> setMainImage(true)} />  
+                    
+                    {/* <h3>Shipping</h3> */}
              </div>
 
          </div>
@@ -126,8 +163,15 @@ function handleCart(product){
         <h1>Reviews:</h1>
             {handleReviews()}
          </div>
-               
-         
+            
+         <div className="alsolike">
+               <div className="alsolikelabel">
+                   You May Also Like
+               </div>
+               <div className="alsolikeimg">
+               {/* {sideImages(allProducts, 5, 8)} */}
+               </div>
+         </div>
            
   
 
