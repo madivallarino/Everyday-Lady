@@ -9,13 +9,13 @@ const [show, setShow ] = useState(false)
     return(
         <div className="footer">
           <div className={show ? "modal" : "closed"}>
-            <OrderStatus onClose={()=> setShow(!show)}/> 
+            <OrderStatus onClose={()=> setShow(!show)} show={show} setShow={setShow}/> 
           </div>
         <div>
           <h3>Help</h3>
           <ul>
-            <a  onClick={()=> setShow(!show)}><li>Order Status</li></a>
-            <li>Start A Return Or Exchange</li>
+            <a  onClick={()=> setShow(true)} ><li>Order Status</li></a>
+           <a> <li>Start A Return Or Exchange</li></a>
             <a href='/returnpolicy'><li>Returns + Exchanges</li></a>
             <li>Shipping</li>
             <li>Orders + Payments</li>

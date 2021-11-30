@@ -42,7 +42,7 @@ function ReturnPolicy(){
                 <div className="pagermid">
                     <h2>Return Policy</h2>
                     <h4>Orders placed between 10/1/2021 and 12/25/2021 can be returned by 2/28/2022.</h4>
-                    <h5>Return or exchange any unused or defective merchandise by mail. Returns made within 30 days of the order delivery will be issued a full refund to the original form of payment. Returns made after 30 days of the order delivery date will be refunded via an emailed e-merchandise credit. Made to order items cannot be exchanged or returned. </h5>
+                    <h5>Return or exchange any unused or defective merchandise by mail. Returns made within 30 days of the order delivery will be issued a full refund to the original form of payment. <br/>Returns made after 30 days of the order delivery date will be refunded via an emailed e-merchandise credit. Made to order items cannot be exchanged or returned. </h5>
                 </div>
                 <div className="pagerbottom">
                     <h2>Online Orders</h2>

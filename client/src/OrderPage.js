@@ -15,7 +15,6 @@ useEffect(()=> {
     .then(data => setAllProducts(data))
 },[])
 
-// console.log(lastItem)
 
 useEffect(()=> {
     fetch('/me')
@@ -134,7 +133,7 @@ const prices =  orders.map((product)=> product.price * product.number)
                     </div>
         
                 </div>
-                <h2>Total: $ {totalPrice()}.00</h2>
+                {/* <h2>Total: $ {totalPrice()}.00</h2> */}
                 <h4>*Please allow 3-5 days for processing & shipping*</h4>
             </div>
             <div className="pastorders">

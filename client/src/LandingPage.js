@@ -67,11 +67,11 @@ function sideImages(array, num1, num2){
                     </div>
                     <div className="boxes headersplitbox">
                         <div className="headerside">
-                            {sideImages(clothing, 25,26)}
+                            {sideImages(clothing, 25,27)}
                         </div>
-                        <div className="headerside">
+                        {/* <div className="headerside">
                             {sideImages(clothing, 8,9)}
-                        </div>
+                        </div> */}
                     </div>
                     <div className="boxes headerlowerbox">
                     {sideImages(home, 8,9)}

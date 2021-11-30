@@ -7,6 +7,7 @@ const [cart, setCart ] = useState([]);
 
 const [loginShow, setLoginShow ] = useState(false);
 const [signInShow, setSigninShow] = useState(false);
+const [input, setInput ] = useState("")
 const [email, setEmail] = useState("");
 const [discount, setDiscount] = useState(false);
     const [password, setPassword] = useState("");
@@ -126,12 +127,13 @@ function handleSignup(e) {
 function handleDiscount(e){
     e.preventDefault()
     setDiscount(true)
+    setInput("")
 }
 function handleDiscountTotal(){
     let total = totalPrice()
-    let discount = total * .25
+    let discount = total * 0.25
     let reduced = total - discount
-    return reduced
+    return Math.trunc(reduced)
 }
 function completeOrder(e){
     handleOrder(e);
@@ -166,7 +168,7 @@ function handleLoginShow(){
         <div className="maincart">
             <div className="orders">
                 {productList}
-                <h2>Total: ${totalPrice()}.00</h2>
+                <h2>Total: ${discount ? handleDiscountTotal() + ".00" : totalPrice() + ".00"}</h2>
             </div>
             
             <div className={show ? "payandlogout" : "payandlogin"}>
@@ -245,7 +247,7 @@ function handleLoginShow(){
                     <h1>{user ? `Hey ${user.name}` : null}!</h1>
                     <label>Your Discount Code: </label>
                     <form onSubmit={handleDiscount}>
-                    <input></input><button>Apply</button></form>
+                    <input onChange={(e)=> setInput(e.target.value)} value={input}></input><button>Apply</button></form>
                     <p>Due to the coronavirus, please allow extra time for shipping</p>
                     <p>*Furniture may take longer than other items*</p>
                 </div>

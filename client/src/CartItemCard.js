@@ -11,7 +11,7 @@ function CartItemCard(props){
            
                 <h2>{name}</h2>
                 <p>{details}</p>
-                {category === "clothing" ? <div><h3>Size: {size}</h3></div> : null}
+                {category === "clothing" ? <div><h3></h3></div> : null}
                {category === "giftcard" ? <h3>Amount: ${price} </h3>:<h3>${price}</h3>} 
             <label>Quantity:</label>
             <select onChange={(e)=>handleQuantity(e.target.value, id)}>

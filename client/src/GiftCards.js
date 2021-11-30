@@ -34,7 +34,7 @@ const [error, setError] = useState(null)
 
     return(
         <div className="allcontainer">
-            <div className="barcontainer">
+            <div className="siderbar">
             
                <h5>Help </h5> 
                 <p>Returns + Exchanges</p>

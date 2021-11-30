@@ -7,12 +7,16 @@ import LandingCard from './LandingCard';
 function ProductPage({refresh, setRefresh}){
 const [product, setProduct ] = useState([]);
 const [allReviews, setAllReviews] = useState([]);
-const [allProducts, setAllProducts] = useState([]);
+const [homeStuff, setHome] = useState([])
+const [lifestyleStuff, setLifestyle] = useState([])
+const [clothingStuff, setClothing] = useState([])
 const [reviewText, setReviewText ] = useState("");
 const [mainImage, setMainImage] = useState(false)
 const [clicked, setClicked ] = useState(false)
 const [secondClicked, setSecondClicked] = useState(false)
 const [thirdClicked, setThirdClicked ] = useState(false)
+const [fourthClicked, setFourthClicked ] = useState(false)
+const [fifthClicked, setFifthClicked] = useState(false)
 const [name, setUserName] = useState("");
 // let history = useHistory();
 
@@ -65,9 +69,25 @@ useEffect(()=> {
 },[])
 
 useEffect(()=> {
-    fetch(`/${product.category}`)
+    fetch(`/clothing`)
     .then((r)=> r.json())
-    .then(data=> setAllProducts(data))
+    .then(data=> {
+       setClothing(data.slice(20,26))
+    })
+},[])
+useEffect(()=> {
+    fetch(`/lifestyle`)
+    .then((r)=> r.json())
+    .then(data=> {
+       setLifestyle(data.slice(20,26))
+    })
+},[])
+useEffect(()=> {
+    fetch(`/home`)
+    .then((r)=> r.json())
+    .then(data=> {
+       setHome(data.slice(20,26))
+    })
 },[])
   
     function handleClick(){
@@ -103,7 +123,7 @@ function handleSize(e, id){
 }
 
 function handleAmount(e, id){
-    let num = parseInt(e)
+    let num = parseInt(e.target.value)
     fetch(`/priceupdate/${id}`, {
         method: "PATCH", 
         headers: {
@@ -115,37 +135,51 @@ function handleAmount(e, id){
 
 
 
-function sideImages(arr, num1, num2){
-    let newClothing = arr.slice(num1,num2).map((product)=> {
-     return (
-         <a href={`/products/${product.id}`}>
-     <LandingCard 
-                 name={product.name} 
-                 price={product.price} 
-                 image={product.image} 
-                 color={product.color} 
-                 back_image={product.back_image} 
-                 id={product.id}
-                 key={product.id}/>
-      </a> 
-        )
+function homeImages(arr){
+  return homeStuff.map((product)=> {
+     return <a href={`/products/${product.id}`}><LandingCard  name={product.name} image={product.image} /></a>
+     
+        
+             } 
+     )
+ } 
+
+ function lifestyleImages(arr){
+   return lifestyleStuff.map((product)=> {
+     return <a href={`/products/${product.id}`}> <LandingCard name={product.name} image={product.image} /> </a>
+     
+        
              }
      )
-     return newClothing
+ } 
+ function clothingImages(arr){
+   return clothingStuff.map((product)=> {
+         return <a href={`/products/${product.id}`}><LandingCard name={product.name} image={product.image}/></a>
+             }
+     )
+     
  } 
  
-
+function handleAlsoLike(){
+    if (product.category === "clothing"){
+        return clothingImages(clothingStuff)
+    } else if (product.category === "home"){
+        return homeImages(homeStuff)
+    } else if (product.category === "lifestyle"){
+        return lifestyleImages(lifestyleStuff)
+    }else {
+        return null
+    }
+}
 
 
     return(
         
        <div className="productpagecontainer">
            <div>
-          <div className="sidetitle">
-               {product.name}
-           </div>
-               {/* <h4 className="sidetitle">
-               women's / <Link to={`/${product.category}`} className="categorylink">{product.category} </Link> </h4>  */}
+               <div className="sidetitle">
+               {product.name} 
+           </div> 
                {/* <button onClick={handleClick} className="productbutton">Go Back</button> */}
            </div>
            
@@ -159,23 +193,22 @@ function sideImages(arr, num1, num2){
                         {product.category === "giftcard" ? 
                         <div>
                             <h3>Amount</h3>
-                            <button value="25" onClick={(e)=> handleAmount(e.target.value, product.id)}>$25</button>
-                            <button value="50" onClick={(e)=> handleAmount(e.target.value, product.id)}>$50</button>
-                            <button value="75"onClick={(e)=> handleAmount(e.target.value, product.id)}>$75</button>
-                            <button value="100" onClick={(e)=> handleAmount(e.target.value, product.id)}>$100</button>
-                            <button value="150" onClick={(e)=> handleAmount(e.target.value, product.id)}>$150</button>
+                            <button value="25" onClick={(e)=> handleAmount(e.target.value, product.id)} onClick={()=> setClicked(!clicked)} className={clicked ? "clicked" : null}>$25</button>
+                            <button value="50" onClick={(e)=> handleAmount(e.target.value, product.id)}onClick={()=> setSecondClicked(!secondClicked)} className={secondClicked ? "clicked" : null}>$50</button>
+                            <button value="75"onClick={(e)=> handleAmount(e.target.value, product.id)} onClick={()=> setThirdClicked(!thirdClicked)} className={thirdClicked ? "clicked" : null}>$75</button>
+                            <button value="100" onClick={(e)=> handleAmount(e.target.value, product.id)} onClick={()=> setFourthClicked(!fourthClicked)} className={fourthClicked ? "clicked" : null}>$100</button>
+                            <button value="150" onClick={(e)=> handleAmount(e.target.value, product.id)} onClick={()=> setFifthClicked(!fifthClicked)} className={fifthClicked ? "clicked" : null}>$150</button>
+                            <br/>
                             <h3>Recipient's Name</h3>
                             <input></input>
                             <h3>Recipient's Email Address</h3>
                             <input></input>
-                            <h3>Gift Message</h3>
-                            <textbox></textbox>
                         </div> 
                         : null}
 
 
 
-                        {product.category === "clothing" ? <div> <h3>Size</h3>
+                        {product.category === "clothing" ? <div> <h3>Size </h3>
                         <button onClick={(e)=> handleSize(e, product.id)} value="S" onClick={()=> setClicked(!clicked)} className={clicked ? "clicked" : null}>S</button>
                         <button onClick={(e)=> handleSize(e, product.id)} value="M" onClick={()=> setSecondClicked(!clicked)} className={secondClicked ? "clicked" : null}>M</button>
                         <button onClick={(e)=> handleSize(e, product.id)} value="L" onClick={()=> setThirdClicked(!clicked)} className={thirdClicked ? "clicked" : null}>L</button>
@@ -206,16 +239,20 @@ function sideImages(arr, num1, num2){
          </div>
          <div className="reviews">
         <h1>Reviews:</h1>
-            {handleReviews()}
+        
+        {handleReviews()}
+            
          </div>
             
          <div className="alsolike">
-               <div className="alsolikelabel">
+              {product.category === "giftcard" ? null : <>
+              <div className="alsolikelabel">
                    You May Also Like
                </div>
                <div className="alsolikeimg">
-               {/* {sideImages(allProducts, 5, 8)} */}
-               </div>
+               {handleAlsoLike()}
+              
+               </div> </>} 
          </div>
            
   

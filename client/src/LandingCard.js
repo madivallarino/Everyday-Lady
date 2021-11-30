@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 
 function LandingCard(props){
-    const {  name, price, color, image, back_image} = props
+    const {  name, image} = props
 
     return(
         <div className="product-card">
